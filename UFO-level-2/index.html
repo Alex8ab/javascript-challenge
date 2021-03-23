@@ -36,8 +36,36 @@
                   <div class="form-group">
                     <ul class="list-group" id="filters">
                       <li class="filter list-group-item">
-                        <label for="date">Enter a Date</label>
-                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2011">
+                        <!-- <label for="date">Enter a Date</label>
+                        <input class="form-control" id="datetime" type="text" placeholder="1/11/2011"> -->
+                        <a>Date
+                          <a>
+                              <select id="selectedDate" onchange="optionChanged(this.value)"></select> 
+                          </a>
+                        </a>
+                        <a>City
+                          <a>
+                              <select id="selectedCity" onchange="optionChangedCoach(this.value)"></select> 
+                          </a>
+                        </a>
+                        <a>State
+                          <a>
+                              <select id="selectedState" onchange="optionChangedCoach(this.value)"></select> 
+                          </a>
+                        </a>
+                        <a>Country
+                          <a>
+                              <select id="selectedCountry" onchange="optionChangedCoach(this.value)"></select> 
+                          </a>
+                        </a>
+                        <a>Shape
+                          <a>
+                              <select id="selectedShape" onchange="optionChangedCoach(this.value)"></select> 
+                          </a>
+                        </a>
+                        
+                      
+
                       </li>
                     </ul>
                   </div>

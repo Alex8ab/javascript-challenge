@@ -14,8 +14,6 @@ function init(){
     fillDropdownShape();
 }
 
-d3.select("#filter-btn").on("click", filterTable)
-
 // code that appends a table in index.html web page and then adds new rows of data for each UFO sighting.
 function createTable(tableData){
     d3.select("tbody").html("")
@@ -28,65 +26,47 @@ function createTable(tableData){
     })
 }
 
-function filterTable(){
-    // Selected date from "Enter a Date" form-control
-    let selectedDate = d3.select("#datetime").property("value")
-    // If is not empty and data exist for choosen date then fill the table
-    if (selectedDate){
-        filteredData = tableData.filter(data => data.datetime == selectedDate)
-        // console.log(filteredData)
-        if (Object.keys(filteredData).length === 0 ){
-            d3.select("tbody").html("")
-            d3.select("#smgDate").text("There is not data for the selected date.")
-        }
-        else{
-            createTable(filteredData)
-        }
-    }
-}
-
-init();
-
-
-
+// Fill dropdown menus
 function fillDropdownDate(){
-    d3.select("#selectedDate").append("option").text('-Select date-')
+    d3.select("#selectedDate").append("option").text('-Select-')
     for(x in tableData){
         d3.select("#selectedDate").append("option").text(tableData[x].datetime);
     }
 };
 
 function fillDropdownCity(){
-    d3.select("#selectedCity").append("option").text('-Select City-')
+    d3.select("#selectedCity").append("option").text('-Select-')
     for(x in tableData){
         d3.select("#selectedCity").append("option").text(tableData[x].city);
     }
 };
 
 function fillDropdownState(){
-    d3.select("#selectedState").append("option").text('-Select State-')
+    d3.select("#selectedState").append("option").text('-Select-')
     for(x in tableData){
         d3.select("#selectedState").append("option").text(tableData[x].state);
     }
 };
 
 function fillDropdownCountry(){
-    d3.select("#selectedCountry").append("option").text('-Select Country-')
+    d3.select("#selectedCountry").append("option").text('-Select-')
     for(x in tableData){
         d3.select("#selectedCountry").append("option").text(tableData[x].country);
     }
 };
 
 function fillDropdownShape(){
-    d3.select("#selectedShape").append("option").text('-Select Shape-')
+    d3.select("#selectedShape").append("option").text('-Select-')
     for(x in tableData){
         d3.select("#selectedShape").append("option").text(tableData[x].shape);
     }
 };
 
+// Filter table button 
+d3.select("#filter-btn").on("click", filterTable)
 
-
-
+// Filter Table function --> gets the actual values of dropdowns buttons and filter data by each value
+// If data doesn't match with filters it returns a mesage
 function filterTable(){
     // Selected date from "Enter a Date" form-control
     let selectedDate = d3.select("#selectedDate").property("value")
@@ -95,51 +75,37 @@ function filterTable(){
     let selectedCountry = d3.select("#selectedCountry").property("value")
     let selectedShape = d3.select("#selectedShape").property("value")
 
-    console.log(`Selected Date: ${selectedDate}`)
-    console.log(`Selected Date: ${selectedDate}`)
-    console.log(`Selected Date: ${selectedDate}`)
-    console.log(`Selected Date: ${selectedDate}`)
-    console.log(`Selected Date: ${selectedDate}`)
-    console.log(`Selected Date: ${selectedDate}`)
-
-
-
-
+    // console.log(`SelectedDate: ${selectedDate}`)
+    // console.log(`selectedCity: ${selectedCity}`)
+    // console.log(`selectedState: ${selectedState}`)
+    // console.log(`selectedCountry: ${selectedCountry}`)
+    // console.log(`selectedShape: ${selectedShape}`)
+    
     // If is not empty and data exist for choosen date then fill the table
-    if (selectedDate){
-        filteredData = tableData.filter(data => data.datetime == selectedDate)
-        // console.log(filteredData)
-        if (Object.keys(filteredData).length === 0 ){
-            d3.select("tbody").html("")
-            d3.select("#smgDate").text("There is not data for the selected date.")
-        }
-        else{
-            createTable(filteredData)
-        }
+    filteredData = tableData
+    if (selectedDate !== '-Select-'){
+        filteredData = filteredData.filter(data => data.datetime == selectedDate)
     }
-}
+    if (selectedCity !== '-Select-'){
+        filteredData = filteredData.filter(data => data.city == selectedCity)
+    }
+    if (selectedState !== '-Select-'){
+        filteredData = filteredData.filter(data => data.state == selectedState)
+    }
+    if (selectedCountry !== '-Select-'){
+        filteredData = filteredData.filter(data => data.country == selectedCountry)
+    }
+    if (selectedShape !== '-Select-'){
+        filteredData = filteredData.filter(data => data.shape == selectedShape)
+    }
+    // If there is no data for the selected values it returns a mesage to the html web page
+    if (Object.keys(filteredData).length === 0 ){
+        d3.select("tbody").html("")
+        d3.select("#smgDate").text("There is not data for the selected values.")
+    }
+    else{
+        createTable(filteredData)
+    }
+};
 
-
-
-
-
-
-function choosenDate(selectedDate){
-
-    console.log(`Selected date: ${selectedDate}`)
-
-
-
-
-    // d3.json(jsonData).then((data) => {
-    //     let teams = data.data[0]; // para /api/v1.0/teams
-    //     // let teams = data.data; // Para leer directo del Json
-    //     // let teams = data; // Para leer directo del Json completo (ref 2)
-
-    //     for(x in teams){
-    //         if(selectedCoach==teams[x].HeadCoach){
-    //             optionChanged(teams[x].FullName)
-    //         }
-    //     }
-    // });
-}
+init();

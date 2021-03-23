@@ -29,36 +29,63 @@ function createTable(tableData){
 // Fill dropdown menus
 function fillDropdownDate(){
     d3.select("#selectedDate").append("option").text('-Select-')
+    // Create an array for the selected column
+    let arr = [];
     for(x in tableData){
-        d3.select("#selectedDate").append("option").text(tableData[x].datetime);
+        arr[x] = tableData[x].datetime;
+    };
+    // Create unique values to display in dropdown
+    let unique = arr.filter((v, i, a) => a.indexOf(v) === i);
+    for(x in unique){
+        d3.select("#selectedDate").append("option").text(unique[x]);
     }
 };
 
 function fillDropdownCity(){
     d3.select("#selectedCity").append("option").text('-Select-')
+    let arr = [];
     for(x in tableData){
-        d3.select("#selectedCity").append("option").text(tableData[x].city);
+        arr[x] = tableData[x].city;
+    };
+    let unique = arr.filter((v, i, a) => a.indexOf(v) === i);
+    for(x in unique){
+        d3.select("#selectedCity").append("option").text(unique[x]);
     }
 };
 
 function fillDropdownState(){
     d3.select("#selectedState").append("option").text('-Select-')
+    let arr = [];
     for(x in tableData){
-        d3.select("#selectedState").append("option").text(tableData[x].state);
+        arr[x] = tableData[x].state;
+    };
+    let unique = arr.filter((v, i, a) => a.indexOf(v) === i);
+    for(x in unique){
+        d3.select("#selectedState").append("option").text(unique[x]);
     }
 };
 
 function fillDropdownCountry(){
     d3.select("#selectedCountry").append("option").text('-Select-')
+    let arr = [];
     for(x in tableData){
-        d3.select("#selectedCountry").append("option").text(tableData[x].country);
+        arr[x] = tableData[x].country;
+    };
+    let unique = arr.filter((v, i, a) => a.indexOf(v) === i);
+    for(x in unique){
+        d3.select("#selectedCountry").append("option").text(unique[x]);
     }
 };
 
 function fillDropdownShape(){
     d3.select("#selectedShape").append("option").text('-Select-')
+    let arr = [];
     for(x in tableData){
-        d3.select("#selectedShape").append("option").text(tableData[x].shape);
+        arr[x] = tableData[x].shape;
+    };
+    let unique = arr.filter((v, i, a) => a.indexOf(v) === i);
+    for(x in unique){
+        d3.select("#selectedShape").append("option").text(unique[x]);
     }
 };
 
